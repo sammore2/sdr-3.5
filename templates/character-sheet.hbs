@@ -1,0 +1,297 @@
+<div class="srd35-ledger {{#if _adjusting}}is-adjusting{{/if}}">
+
+  {{!-- Persistent left rail: portrait + ability ledger + quick stats --}}
+  <aside class="srd35-rail">
+    <button type="button" class="srd35-portrait" data-action="pick-portrait" title="{{localize "sheet.portrait"}}">
+      {{#if _avatar}}<img src="{{_avatar}}" alt="" />{{else}}<i class="fa-solid fa-user"></i>{{/if}}
+      <span class="srd35-portrait-edit"><i class="fa-solid fa-pen"></i></span>
+    </button>
+
+    <section class="srd35-card srd35-abilities">
+      <h3 class="srd35-card-title">{{localize "sheet.attributes"}}</h3>
+      {{#each _abilities}}
+      <div class="srd35-ability">
+        <span class="srd35-ability-name">{{localize (concat "abilities." key)}}</span>
+        <input class="srd35-in srd35-ability-score" type="number" name="sd:abilities.{{key}}.value" value="{{value}}" />
+        <button type="button" class="srd35-roll srd35-ability-mod" data-action="roll-ability" data-key="{{key}}" title="{{localize "sheet.roll"}} {{localize (concat "abilities." key)}}">{{modFmt}}</button>
+      </div>
+      {{/each}}
+    </section>
+
+    <section class="srd35-card srd35-quick">
+      <button type="button" class="srd35-quick-row srd35-roll" data-action="roll-initiative">
+        <span>{{localize "sheet.initiative"}}</span><strong>{{_initiative}}</strong>
+      </button>
+      <div class="srd35-quick-row">
+        <span>{{localize "sheet.speed"}}</span>
+        <span><input class="srd35-in srd35-in-sm" type="number" name="sd:movement.land" value="{{systemData.movement.land}}" /> m</span>
+      </div>
+      <div class="srd35-quick-row">
+        <span>{{localize "sheet.size"}}</span>
+        <select class="srd35-in srd35-select" name="sd:size">
+          {{#each _sizeOptions}}<option value="{{value}}" {{#if selected}}selected{{/if}}>{{localize (concat "sizes." value)}}</option>{{/each}}
+        </select>
+      </div>
+      <div class="srd35-adj srd35-quick-row">
+        <span>{{localize "sheet.initMisc"}}</span>
+        <input class="srd35-in srd35-in-sm" type="number" name="sd:initiative.misc" value="{{systemData.initiative.misc}}" />
+      </div>
+    </section>
+  </aside>
+
+  <div class="srd35-main">
+    {{!-- Identity header --}}
+    <header class="srd35-head">
+      <div class="srd35-head-id">
+        <input class="srd35-in srd35-name" type="text" name="name" value="{{name}}" placeholder="{{localize "sheet.name"}}" />
+        <div class="srd35-head-line">
+          <span class="srd35-race">{{#if _raceName}}{{_raceName}}{{else}}<em>{{localize "sheet.noRace"}}</em>{{/if}}</span>
+          {{#each _classes}}
+          <button type="button" class="srd35-class-chip" data-action="open-item" data-id="{{id}}">{{name}} <b>{{level}}</b></button>
+          {{/each}}
+          <button type="button" class="srd35-ghost" data-action="create-item" data-item-type="class" title="{{localize "sheet.addClass"}}"><i class="fa-solid fa-plus"></i></button>
+        </div>
+        <div class="srd35-xp{{#if _xp.ready}} is-ready{{/if}}" title="{{localize "sheet.xpHint"}}">
+          <span class="srd35-xp-label">XP</span>
+          <div class="srd35-xp-bar"><span style="width: {{_xp.pct}}%"></span></div>
+          <span class="srd35-xp-read"><input class="srd35-in srd35-in-sm srd35-xp-in" type="number" name="sd:xp.value" value="{{_xp.value}}" /> / {{_xp.next}}</span>
+        </div>
+      </div>
+      <div class="srd35-level" title="{{localize "sheet.characterLevel"}}">
+        <span>{{localize "sheet.level"}}</span><strong>{{_level}}</strong>
+      </div>
+      <button type="button" class="srd35-adjust-toggle" data-action="toggle-adjust" title="{{localize "sheet.adjustHint"}}">
+        <i class="fa-solid fa-sliders"></i><span>{{localize "sheet.adjust"}}</span>
+      </button>
+    </header>
+
+    <nav class="srd35-tabs">
+      <button type="button" class="srd35-tab-btn" data-action="tab" data-tab="overview">{{localize "sheet.overview"}}</button>
+      <button type="button" class="srd35-tab-btn" data-action="tab" data-tab="spells">{{localize "sheet.spells"}}</button>
+      <button type="button" class="srd35-tab-btn" data-action="tab" data-tab="feats">{{localize "sheet.feats"}}</button>
+      <button type="button" class="srd35-tab-btn" data-action="tab" data-tab="inventory">{{localize "sheet.inventory"}}</button>
+      <button type="button" class="srd35-tab-btn" data-action="tab" data-tab="notes">{{localize "sheet.notes"}}</button>
+    </nav>
+
+    {{!-- ═══ Overview ═══ --}}
+    <div class="srd35-panel srd35-overview" data-tab-content="overview">
+      {{!-- Skill ledger --}}
+      <section class="srd35-card srd35-skills">
+        <h3 class="srd35-card-title">{{localize "sheet.skills"}}</h3>
+        <div class="srd35-skill-head">
+          <span title="{{localize "sheet.classSkillHint"}}">C</span>
+          <span>{{localize "sheet.skill"}}</span>
+          <span>{{localize "sheet.ranksShort"}}</span>
+          <span class="srd35-adj" title="{{localize "sheet.misc"}}">±</span>
+          <span>{{localize "sheet.total"}}</span>
+        </div>
+        <div class="srd35-skill-list">
+          {{#each _skills}}
+          <div class="srd35-skill {{#if classSkill}}is-class{{/if}}">
+            <input type="checkbox" class="srd35-check" name="sd:skills.{{key}}.classSkill" {{checked classSkill}} title="{{localize "sheet.classSkillHint"}}" />
+            <span class="srd35-skill-name">
+              {{localize (concat "skills." key)}}{{#if ability}} <small>{{ability}}</small>{{/if}}
+              {{#if subtitled}}<input class="srd35-in srd35-skill-sub" type="text" name="sd:skills.{{key}}.sub" value="{{sub}}" placeholder="{{localize "sheet.specialty"}}" />{{/if}}
+            </span>
+            <input class="srd35-in srd35-in-sm" type="number" step="0.5" name="sd:skills.{{key}}.ranks" value="{{ranks}}" />
+            <input class="srd35-adj srd35-in srd35-in-sm" type="number" name="sd:skills.{{key}}.misc" value="{{misc}}" />
+            <button type="button" class="srd35-roll srd35-skill-total" data-action="roll-skill" data-key="{{key}}">{{totalFmt}}</button>
+          </div>
+          {{/each}}
+        </div>
+        <footer class="srd35-skill-foot">
+          <span>{{localize "sheet.ranksUsed"}} <b>{{_ranksUsed}}</b></span>
+          <span title="{{localize "sheet.maxClass"}} / {{localize "sheet.maxCross"}}">{{localize "sheet.max"}} <b>{{_maxClass}} / {{_maxCross}}</b></span>
+        </footer>
+      </section>
+      <div class="srd35-overview-main">
+
+        <div class="srd35-row-2">
+          <section class="srd35-card srd35-hp">
+            <h3 class="srd35-card-title">{{localize "sheet.hp"}}</h3>
+            <div class="srd35-hp-figure">
+              <input class="srd35-in srd35-big" type="number" name="sd:hp.value" value="{{_hp.value}}" title="{{localize "sheet.current"}}" />
+              <span class="srd35-hp-sep">/</span>
+              <span class="srd35-big srd35-derived" title="{{localize "sheet.maxTotalHint"}}">{{_hp.maxTotal}}</span>
+            </div>
+            <div class="srd35-bar"><span style="width: {{_hp.pct}}%"></span></div>
+            <div class="srd35-hp-foot">
+              <label>{{localize "sheet.temp"}} <input class="srd35-in srd35-in-sm" type="number" name="sd:hp.temp" value="{{_hp.temp}}" /></label>
+            </div>
+            <div class="srd35-adj srd35-adj-grid">
+              <label>{{localize "sheet.rolledHp"}} <input class="srd35-in srd35-in-sm" type="number" name="sd:hp.max" value="{{_hp.max}}" /></label>
+              <label>{{localize "sheet.bonus"}} <input class="srd35-in srd35-in-sm" type="number" name="sd:hp.bonus" value="{{_hp.bonus}}" /></label>
+            </div>
+          </section>
+
+          <section class="srd35-card srd35-defense">
+            <h3 class="srd35-card-title">{{localize "sheet.defense"}}</h3>
+            <div class="srd35-ac-trio">
+              <div class="srd35-ac srd35-ac-main" tabindex="0">
+                <span class="srd35-ac-shield"><strong>{{_ac}}</strong></span>
+                <span>{{localize "sheet.ac"}}</span>
+                <div class="srd35-sum" role="tooltip">
+                  {{#each _acParts}}<div class="srd35-sum-line"><b>{{value}}</b><i>{{localize (concat "sheet." key)}}</i></div>{{/each}}
+                  <div class="srd35-sum-line srd35-sum-total"><b>{{_ac}}</b><i>{{localize "sheet.ac"}}</i></div>
+                </div>
+              </div>
+              <div class="srd35-ac" title="{{_touchTitle}}"><strong>{{_touch}}</strong><span>{{localize "sheet.touch"}}</span></div>
+              <div class="srd35-ac" title="{{_ffTitle}}"><strong>{{_flatFooted}}</strong><span>{{localize "sheet.flatFooted"}}</span></div>
+            </div>
+            <div class="srd35-adj srd35-adj-grid">
+              <label>{{localize "sheet.armor"}} <input class="srd35-in srd35-in-sm" type="number" name="sd:ac.armor" value="{{systemData.ac.armor}}" /></label>
+              <label>{{localize "sheet.shield"}} <input class="srd35-in srd35-in-sm" type="number" name="sd:ac.shield" value="{{systemData.ac.shield}}" /></label>
+              <label>{{localize "sheet.natural"}} <input class="srd35-in srd35-in-sm" type="number" name="sd:ac.natural" value="{{systemData.ac.natural}}" /></label>
+              <label>{{localize "sheet.deflection"}} <input class="srd35-in srd35-in-sm" type="number" name="sd:ac.deflection" value="{{systemData.ac.deflection}}" /></label>
+              <label>{{localize "sheet.dodge"}} <input class="srd35-in srd35-in-sm" type="number" name="sd:ac.dodge" value="{{systemData.ac.dodge}}" /></label>
+              <label>{{localize "sheet.misc"}} <input class="srd35-in srd35-in-sm" type="number" name="sd:ac.misc" value="{{systemData.ac.misc}}" /></label>
+              <label>{{localize "sheet.maxDex"}} <input class="srd35-in srd35-in-sm" type="text" name="sd:ac.maxDex" value="{{systemData.ac.maxDex}}" placeholder="—" /></label>
+              <label>{{localize "sheet.checkPenalty"}} <input class="srd35-in srd35-in-sm" type="number" name="sd:ac.checkPenalty" value="{{systemData.ac.checkPenalty}}" /></label>
+            </div>
+          </section>
+        </div>
+
+        <section class="srd35-card srd35-saves">
+          <h3 class="srd35-card-title">{{localize "sheet.saves"}}</h3>
+          <div class="srd35-save-trio">
+            {{#each _saves}}
+            <div class="srd35-save">
+              <button type="button" class="srd35-roll srd35-save-total" data-action="roll-save" data-key="{{key}}" title="{{title}}">{{totalFmt}}</button>
+              <span class="srd35-save-name">{{localize (concat "saves." key)}}</span>
+              <label class="srd35-adj">{{localize "sheet.base"}} <input class="srd35-in srd35-in-sm" type="number" name="sd:saves.{{key}}.base" value="{{base}}" /></label>
+            </div>
+            {{/each}}
+          </div>
+        </section>
+
+        <section class="srd35-card srd35-offense">
+          <h3 class="srd35-card-title">
+            {{localize "sheet.attacks"}}
+            <span class="srd35-offense-stats">
+              <span title="{{localize "sheet.babHint"}}">{{localize "sheet.bab"}} <b>{{_babLabel}}</b></span>
+              <button type="button" class="srd35-roll" data-action="roll-grapple">{{localize "sheet.grapple"}} <b>{{_grapple}}</b></button>
+            </span>
+          </h3>
+          <div class="srd35-adj srd35-adj-grid">
+            <label>{{localize "sheet.bab"}} {{localize "sheet.misc"}} <input class="srd35-in srd35-in-sm" type="number" name="sd:combat.babMisc" value="{{systemData.combat.babMisc}}" /></label>
+            <label>{{localize "sheet.grapple"}} {{localize "sheet.misc"}} <input class="srd35-in srd35-in-sm" type="number" name="sd:combat.grappleMisc" value="{{systemData.combat.grappleMisc}}" /></label>
+          </div>
+          {{#if _weapons.length}}
+          <ul class="srd35-weapons">
+            {{#each _weapons}}
+            <li class="srd35-weapon" data-id="{{id}}">
+              <button type="button" class="srd35-weapon-name" data-action="open-item" data-id="{{id}}">{{name}}</button>
+              <span class="srd35-weapon-atks">
+                {{#each attacks}}<button type="button" class="srd35-roll srd35-atk" data-action="roll-attack" data-id="{{../id}}" data-attack-index="{{index}}" title="{{localize "sheet.attack"}}">{{bonusFmt}}</button>{{/each}}
+              </span>
+              <button type="button" class="srd35-roll srd35-damage" data-action="roll-damage" data-id="{{id}}" title="{{localize "sheet.damage"}}">{{damage}}</button>
+              <span class="srd35-crit" title="{{localize "sheet.crit"}}">{{critLabel}}</span>
+              <span class="srd35-weapon-tools">
+                <button type="button" data-action="roll-confirm" data-id="{{id}}" title="{{localize "sheet.confirm"}}"><i class="fa-solid fa-crosshairs"></i></button>
+                <button type="button" data-action="roll-damage-crit" data-id="{{id}}" title="{{localize "sheet.critDamage"}}"><i class="fa-solid fa-burst"></i></button>
+                <button type="button" data-action="delete-item" data-id="{{id}}" title="{{localize "sheet.delete"}}"><i class="fa-solid fa-trash"></i></button>
+              </span>
+            </li>
+            {{/each}}
+          </ul>
+          {{else}}
+          <p class="srd35-empty">{{localize "sheet.noWeapons"}}</p>
+          {{/if}}
+          <button type="button" class="srd35-add" data-action="create-item" data-item-type="weapon"><i class="fa-solid fa-plus"></i> {{localize "sheet.addWeapon"}}</button>
+        </section>
+      </div>
+
+    </div>
+
+    {{!-- ═══ Spells ═══ --}}
+    <div class="srd35-panel" data-tab-content="spells">
+      <section class="srd35-card">
+        <h3 class="srd35-card-title">{{localize "sheet.spellSlots"}}
+          <span class="srd35-offense-stats">
+            {{#each _castingClasses}}<button type="button" class="srd35-class-chip" data-action="open-item" data-id="{{id}}">{{name}} <b>{{ability}}</b></button>{{/each}}
+          </span>
+        </h3>
+        <div class="srd35-slots">
+          {{#each _slots}}
+          <div class="srd35-slot" title="{{maxTitle}}">
+            <span class="srd35-slot-level">{{level}}</span>
+            <span class="srd35-slot-count">
+              <input class="srd35-in srd35-in-sm" type="number" name="sd:spells.slots.{{level}}.value" value="{{value}}" />
+              <i>/</i>
+              <input class="srd35-in srd35-in-sm" type="number" name="sd:spells.slots.{{level}}.max" value="{{max}}" />
+            </span>
+          </div>
+          {{/each}}
+        </div>
+        <label class="srd35-adj">{{localize "sheet.spellAbility"}} <input class="srd35-in srd35-in-sm" type="text" name="sd:spells.ability" value="{{systemData.spells.ability}}" placeholder="int" /></label>
+      </section>
+      {{#each _spellsByLevel}}
+      <section class="srd35-card">
+        <h3 class="srd35-card-title">{{localize "sheet.spellLevel"}} {{level}}</h3>
+        <ul class="srd35-list">
+          {{#each spells}}<li data-id="{{id}}">
+            <button type="button" class="srd35-list-name" data-action="open-item" data-id="{{id}}">{{name}}</button>
+            <button type="button" class="srd35-list-tool" data-action="delete-item" data-id="{{id}}" title="{{localize "sheet.delete"}}"><i class="fa-solid fa-trash"></i></button>
+          </li>{{/each}}
+        </ul>
+      </section>
+      {{/each}}
+      <button type="button" class="srd35-add" data-action="create-item" data-item-type="spell"><i class="fa-solid fa-plus"></i> {{localize "sheet.addSpell"}}</button>
+    </div>
+
+    {{!-- ═══ Feats ═══ --}}
+    <div class="srd35-panel" data-tab-content="feats">
+      <div class="srd35-row-2">
+        <section class="srd35-card">
+          <h3 class="srd35-card-title">{{localize "sheet.feats"}}</h3>
+          <ul class="srd35-list">
+            {{#each _feats}}<li data-id="{{id}}">
+              <button type="button" class="srd35-list-name" data-action="open-item" data-id="{{id}}">{{name}}</button>
+              <button type="button" class="srd35-list-tool" data-action="delete-item" data-id="{{id}}" title="{{localize "sheet.delete"}}"><i class="fa-solid fa-trash"></i></button>
+            </li>{{else}}<li class="srd35-empty">{{localize "sheet.none"}}</li>{{/each}}
+          </ul>
+          <button type="button" class="srd35-add" data-action="create-item" data-item-type="feat"><i class="fa-solid fa-plus"></i> {{localize "sheet.addFeat"}}</button>
+        </section>
+        <section class="srd35-card">
+          <h3 class="srd35-card-title">{{localize "sheet.features"}}</h3>
+          <ul class="srd35-list">
+            {{#each _features}}<li data-id="{{id}}">
+              <button type="button" class="srd35-list-name" data-action="open-item" data-id="{{id}}">{{name}}</button>
+              <button type="button" class="srd35-list-tool" data-action="delete-item" data-id="{{id}}" title="{{localize "sheet.delete"}}"><i class="fa-solid fa-trash"></i></button>
+            </li>{{else}}<li class="srd35-empty">{{localize "sheet.none"}}</li>{{/each}}
+          </ul>
+          <button type="button" class="srd35-add" data-action="create-item" data-item-type="class-feature"><i class="fa-solid fa-plus"></i> {{localize "sheet.addFeature"}}</button>
+        </section>
+      </div>
+    </div>
+
+    {{!-- ═══ Inventory ═══ --}}
+    <div class="srd35-panel" data-tab-content="inventory">
+      {{#each _gearGroups}}
+      <section class="srd35-card">
+        <h3 class="srd35-card-title">{{localize (concat "itemTypes." type)}}</h3>
+        <ul class="srd35-list">
+          {{#each items}}<li data-id="{{id}}">
+            <button type="button" class="srd35-list-name" data-action="open-item" data-id="{{id}}">{{name}}</button>
+            <span class="srd35-list-meta">{{#if quantity}}×{{quantity}}{{/if}} {{#if weight}}{{weight}} kg{{/if}}</span>
+            <button type="button" class="srd35-list-tool" data-action="delete-item" data-id="{{id}}" title="{{localize "sheet.delete"}}"><i class="fa-solid fa-trash"></i></button>
+          </li>{{/each}}
+        </ul>
+      </section>
+      {{else}}
+      <p class="srd35-empty">{{localize "sheet.none"}}</p>
+      {{/each}}
+      <div class="srd35-panel-foot">
+        <span>{{localize "sheet.totalWeight"}} <b>{{_totalWeight}}</b></span>
+        <button type="button" class="srd35-add" data-action="create-item" data-item-type="equipment"><i class="fa-solid fa-plus"></i> {{localize "sheet.addItem"}}</button>
+      </div>
+    </div>
+
+    {{!-- ═══ Notes ═══ --}}
+    <div class="srd35-panel" data-tab-content="notes">
+      <section class="srd35-card srd35-notes-card">
+        <textarea class="srd35-notes" name="sd:details.notes" placeholder="{{localize "sheet.notesPlaceholder"}}">{{systemData.details.notes}}</textarea>
+      </section>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,1213 @@
+@font-face {
+  font-family: 'SDR35 Garamond';
+  src: url('/marketplace/rulesets/srd35/assets/fonts/eb-garamond-500.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'SDR35 Garamond';
+  src: url('/marketplace/rulesets/srd35/assets/fonts/eb-garamond-700.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* SDR 3.5 — ledger sheet ("livro-razao do aventureiro").
+   Thin rules, right-aligned tabular figures, quiet section heads. */
+
+.srd35-sheet {
+  --srd35-bg: #1a1d1a;
+  --srd35-surface: #232823;
+  --srd35-line: #3a4239;
+  --srd35-text: #e2e6dc;
+  --srd35-dim: #8f998b;
+  --srd35-accent: #c08a4a;
+  --srd35-moss: #7fa068;
+  --srd35-danger: #c0574f;
+  background: var(--srd35-bg);
+  color: var(--srd35-text);
+  font-family: var(--font-body);
+  padding: 12px;
+  overflow-y: auto;
+}
+
+.srd35-sheet h3,
+.srd35-sheet h4 {
+  font-family: var(--font-display);
+  color: var(--srd35-dim);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--srd35-line);
+  margin: 12px 0 6px;
+  padding-bottom: 2px;
+}
+
+.srd35-sheet button {
+  font-family: var(--font-body);
+  color: var(--srd35-text);
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.srd35-sheet button:hover {
+  border-color: var(--srd35-accent);
+}
+
+.srd35-ledger {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 100%;
+}
+
+.srd35-head {
+  border-bottom: 2px solid var(--srd35-accent);
+  padding-bottom: 8px;
+}
+
+.srd35-name {
+  width: 100%;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+}
+
+.srd35-head-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  margin-top: 6px;
+  color: var(--srd35-dim);
+  font-size: 0.85rem;
+}
+
+.srd35-level,
+.srd35-kind,
+.srd35-race-name {
+  font-variant-numeric: tabular-nums;
+}
+
+.srd35-classes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  margin-top: 6px;
+}
+
+.srd35-section-label {
+  color: var(--srd35-dim);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.srd35-chip {
+  border: 1px solid var(--srd35-line);
+  background: var(--srd35-surface);
+  padding: 1px 8px;
+}
+
+.srd35-chip-add {
+  color: var(--srd35-moss);
+}
+
+.srd35-columns {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.srd35-attrs {
+  flex: 0 0 150px;
+  max-width: 150px;
+}
+
+.srd35-attr-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-bottom: 1px solid var(--srd35-line);
+  padding: 3px 0;
+}
+
+.srd35-attr-name {
+  flex: 1;
+  font-size: 0.8rem;
+  color: var(--srd35-dim);
+}
+
+.srd35-mod {
+  font-family: var(--font-display);
+  font-variant-numeric: tabular-nums;
+  color: var(--srd35-accent);
+  min-width: 2.2em;
+  text-align: right;
+}
+
+.srd35-vitals {
+  flex: 1;
+  min-width: 0;
+}
+
+.srd35-hp-row,
+.srd35-vital-row,
+.srd35-ac-row,
+.srd35-save-row,
+.srd35-bab-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  border-bottom: 1px solid var(--srd35-line);
+  padding: 5px 0;
+}
+
+.srd35-ac-edit {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 5px 0;
+  font-size: 0.8rem;
+  color: var(--srd35-dim);
+}
+
+.srd35-ac-box {
+  font-family: var(--font-display);
+  font-variant-numeric: tabular-nums;
+  border: 1px solid var(--srd35-line);
+  background: var(--srd35-surface);
+  padding: 2px 10px;
+}
+
+.srd35-save {
+  font-variant-numeric: tabular-nums;
+  color: var(--srd35-moss);
+}
+
+.srd35-init,
+.srd35-grapple {
+  font-variant-numeric: tabular-nums;
+  color: var(--srd35-accent);
+}
+
+.srd35-max-total {
+  color: var(--srd35-dim);
+  font-variant-numeric: tabular-nums;
+}
+
+.srd35-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  border-bottom: 1px solid var(--srd35-line);
+  padding-bottom: 4px;
+}
+
+.srd35-tab-btn {
+  padding: 4px 10px;
+  color: var(--srd35-dim);
+}
+
+.srd35-tab-btn.active {
+  color: var(--srd35-accent);
+  border-bottom: 2px solid var(--srd35-accent);
+}
+
+.srd35-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.srd35-table th {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--srd35-dim);
+  text-align: right;
+  border-bottom: 1px solid var(--srd35-line);
+  padding: 3px 6px;
+}
+
+.srd35-table th:first-child,
+.srd35-table td:first-child {
+  text-align: left;
+}
+
+.srd35-table td {
+  border-bottom: 1px solid var(--srd35-line);
+  padding: 3px 6px;
+  text-align: right;
+}
+
+.srd35-total {
+  font-family: var(--font-display);
+  color: var(--srd35-text);
+}
+
+.srd35-atk {
+  color: var(--srd35-accent);
+  margin-left: 4px;
+}
+
+.srd35-link {
+  color: var(--srd35-moss);
+  text-align: left;
+}
+
+.srd35-sub {
+  color: var(--srd35-dim);
+  font-style: italic;
+}
+
+.srd35-sub-input {
+  width: 100%;
+}
+
+.srd35-sub-row td {
+  border-bottom: 1px solid var(--srd35-line);
+}
+
+.srd35-ledger-foot {
+  color: var(--srd35-dim);
+  font-size: 0.8rem;
+  border-top: 1px solid var(--srd35-line);
+  margin-top: 6px;
+  padding-top: 4px;
+  font-variant-numeric: tabular-nums;
+}
+
+.srd35-casters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.srd35-plain-list {
+  list-style: none;
+  margin: 4px 0;
+  padding: 0;
+}
+
+.srd35-plain-list li {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  border-bottom: 1px dotted var(--srd35-line);
+  padding: 2px 0;
+}
+
+.srd35-muted {
+  color: var(--srd35-dim);
+  font-size: 0.85rem;
+}
+
+.srd35-notes {
+  width: 100%;
+  min-height: 120px;
+}
+
+.srd35-num {
+  width: 3.5em;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.srd35-text {
+  width: 8em;
+}
+
+/* NPC: single column, tighter rows. */
+.srd35-npc .srd35-stat-block {
+  border: 1px solid var(--srd35-line);
+  background: var(--srd35-surface);
+  padding: 8px;
+}
+
+.srd35-attr-line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.srd35-attr-chip {
+  display: inline-flex;
+  gap: 4px;
+  align-items: center;
+  border: 1px solid var(--srd35-line);
+  padding: 2px 6px;
+  font-size: 0.8rem;
+}
+
+.srd35-weapon-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  border-bottom: 1px solid var(--srd35-line);
+  padding: 3px 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.srd35-saves-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+/* Item sheet: two-column fields. */
+.srd35-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.srd35-item-head {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  border-bottom: 2px solid var(--srd35-accent);
+  padding-bottom: 8px;
+}
+
+.srd35-icon {
+  font-size: 1.6rem;
+  min-width: 2.2em;
+}
+
+.srd35-item-tabs {
+  display: flex;
+  gap: 4px;
+}
+
+.srd35-item-tab-btn {
+  padding: 3px 10px;
+  color: var(--srd35-dim);
+}
+
+.srd35-item-tab-btn.active {
+  color: var(--srd35-accent);
+  border-bottom: 2px solid var(--srd35-accent);
+}
+
+.srd35-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 12px;
+}
+
+.srd35-field {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 0.8rem;
+  color: var(--srd35-dim);
+}
+
+.srd35-progression {
+  border-top: 1px solid var(--srd35-line);
+  margin-top: 8px;
+  padding-top: 6px;
+  font-variant-numeric: tabular-nums;
+  color: var(--srd35-moss);
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   Character sheet v2 — "ledger": parchment folios on a dark leather desk.
+   Everything below is scoped to .srd35-ledger-ui and overrides the
+   first-pass rules above. Rulesets are addons, so restyling inputs inside
+   this sheet is allowed; the scope keeps it off every other window.
+   ══════════════════════════════════════════════════════════════════════ */
+
+.srd35-ledger-ui {
+  --led-desk: #1a1611;
+  --led-paper: #e9dec3;
+  --led-paper-2: #e0d2b1;
+  --led-edge: #b5a174;
+  --led-rule: #cbba90;
+  --led-ink: #2b2317;
+  --led-ink-dim: #6f5f44;
+  --led-bronze: #8a571f;
+  --led-bronze-hi: #c99655;
+  --led-moss: #4d6a38;
+  --led-danger: #a4423a;
+  --led-serif: 'SDR35 Garamond', Georgia, 'Times New Roman', serif;
+  background:
+    radial-gradient(120% 80% at 0% 0%, #2a2219 0%, transparent 60%),
+    var(--led-desk);
+  color: var(--led-ink);
+  padding: 14px;
+}
+
+.srd35-ledger-ui .srd35-ledger {
+  display: grid;
+  grid-template-columns: 200px minmax(0, 1fr);
+  gap: 14px;
+  align-items: start;
+}
+
+/* ── Scoped inputs: ink on paper, underline only ───────────────────── */
+.srd35-ledger-ui .srd35-ledger .srd35-in {
+  background: transparent;
+  border: none;
+  border-bottom: 1px dashed var(--led-edge);
+  border-radius: 0;
+  box-shadow: none;
+  color: var(--led-ink);
+  font: inherit;
+  text-align: center;
+  padding: 0 2px;
+  min-height: 0;
+  height: auto;
+  -moz-appearance: textfield;
+}
+.srd35-ledger-ui .srd35-ledger .srd35-in::-webkit-outer-spin-button,
+.srd35-ledger-ui .srd35-ledger .srd35-in::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.srd35-ledger-ui .srd35-ledger .srd35-in:hover { border-bottom-color: var(--led-bronze); }
+.srd35-ledger-ui .srd35-ledger .srd35-in:focus {
+  outline: none;
+  border-bottom: 1px solid var(--led-bronze);
+  background: rgba(138, 87, 31, 0.08);
+}
+.srd35-ledger-ui .srd35-ledger .srd35-in-sm { width: 3.2em; font-variant-numeric: tabular-nums; }
+.srd35-ledger-ui .srd35-ledger .srd35-select { width: auto; text-align: right; cursor: pointer; }
+.srd35-ledger-ui .srd35-ledger button { font: inherit; color: inherit; background: none; border: none; padding: 0; cursor: pointer; }
+
+/* ── Adjust mode: fine-tuning fields stay hidden until asked for ─── */
+.srd35-ledger-ui .srd35-adj { display: none !important; }
+.srd35-ledger-ui .is-adjusting .srd35-adj { display: revert !important; }
+.srd35-ledger-ui .is-adjusting .srd35-adj-grid { display: grid !important; }
+.srd35-ledger-ui .is-adjusting .srd35-quick-row.srd35-adj { display: flex !important; }
+
+/* ── Cards (folios) ─────────────────────────────────────────────────── */
+.srd35-ledger-ui .srd35-card {
+  background: linear-gradient(180deg, var(--led-paper) 0%, var(--led-paper-2) 100%);
+  border: 1px solid var(--led-edge);
+  border-radius: 3px;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.35) inset, 0 6px 14px rgba(0, 0, 0, 0.35);
+  padding: 10px 12px 12px;
+}
+.srd35-ledger-ui .srd35-card-title {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 0 0 8px;
+  padding: 0 0 4px;
+  border-bottom: 1px solid var(--led-rule);
+  font-family: var(--led-serif);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--led-bronze);
+}
+
+/* rollable figures: ink that warms to bronze */
+.srd35-ledger-ui .srd35-roll { border-radius: 2px; transition: color 120ms, background 120ms; }
+.srd35-ledger-ui .srd35-roll:hover { color: var(--led-bronze); background: rgba(138, 87, 31, 0.1); }
+.srd35-ledger-ui .srd35-ledger button:focus-visible { outline: 2px solid var(--led-bronze-hi); outline-offset: 1px; }
+
+/* ── Left rail ──────────────────────────────────────────────────────── */
+.srd35-ledger-ui .srd35-rail { display: flex; flex-direction: column; gap: 12px; }
+.srd35-ledger-ui .srd35-ledger .srd35-portrait {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  border: 1px solid var(--led-edge);
+  border-radius: 3px;
+  overflow: hidden;
+  background: linear-gradient(160deg, #3a3025, #211a13);
+  display: grid;
+  place-items: center;
+  color: #6d5d44;
+  font-size: 3.2rem;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.45);
+}
+.srd35-ledger-ui .srd35-portrait img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.srd35-ledger-ui .srd35-portrait-edit {
+  position: absolute; right: 6px; bottom: 6px;
+  width: 26px; height: 26px; border-radius: 50%;
+  display: grid; place-items: center;
+  font-size: 0.75rem; color: var(--led-paper);
+  background: rgba(26, 22, 17, 0.8);
+  opacity: 0; transition: opacity 120ms;
+}
+.srd35-ledger-ui .srd35-portrait:hover .srd35-portrait-edit,
+.srd35-ledger-ui .srd35-portrait:focus-visible .srd35-portrait-edit { opacity: 1; }
+
+.srd35-ledger-ui .srd35-ability {
+  display: grid;
+  grid-template-columns: 1fr 2.6em 2.6em;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 0;
+  border-bottom: 1px solid var(--led-rule);
+}
+.srd35-ledger-ui .srd35-ability:last-child { border-bottom: none; }
+.srd35-ledger-ui .srd35-ability-name { font-size: 0.85rem; color: var(--led-ink-dim); }
+.srd35-ledger-ui .srd35-ledger .srd35-ability-score {
+  font-family: var(--led-serif);
+  font-size: 1.1rem;
+  font-weight: 700;
+  width: 100%;
+}
+.srd35-ledger-ui .srd35-ability-mod {
+  font-family: var(--led-serif);
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.srd35-ledger-ui .srd35-quick { padding: 4px 12px; }
+.srd35-ledger-ui .srd35-ledger .srd35-quick-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  padding: 7px 0;
+  font-size: 0.85rem;
+  color: var(--led-ink-dim);
+  border-bottom: 1px solid var(--led-rule);
+}
+.srd35-ledger-ui .srd35-quick-row:last-child { border-bottom: none; }
+.srd35-ledger-ui .srd35-quick-row strong {
+  font-family: var(--led-serif); font-size: 1.05rem; color: var(--led-ink);
+}
+
+/* ── Header ─────────────────────────────────────────────────────────── */
+.srd35-ledger-ui .srd35-main { min-width: 0; display: flex; flex-direction: column; gap: 10px; }
+.srd35-ledger-ui .srd35-ledger .srd35-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 14px;
+  margin: 0;
+  padding: 2px 0 8px;
+  border-bottom: 1px solid #3b3126;
+}
+.srd35-ledger-ui .srd35-ledger .srd35-name {
+  width: 100%;
+  text-align: left;
+  font-family: var(--led-serif);
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: var(--led-paper);
+  border-bottom-color: transparent;
+  padding: 0;
+}
+.srd35-ledger-ui .srd35-ledger .srd35-name:hover,
+.srd35-ledger-ui .srd35-ledger .srd35-name:focus { border-bottom-color: var(--led-bronze-hi); background: transparent; }
+.srd35-ledger-ui .srd35-head-line {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 6px;
+  margin-top: 4px; font-size: 0.85rem; color: #b8a888;
+}
+.srd35-ledger-ui .srd35-race { margin-right: 4px; }
+.srd35-ledger-ui .srd35-race em { font-style: italic; opacity: 0.7; }
+.srd35-ledger-ui .srd35-ledger .srd35-class-chip {
+  padding: 2px 9px;
+  border: 1px solid #5a4a36;
+  border-radius: 999px;
+  color: var(--led-paper);
+  font-size: 0.8rem;
+}
+.srd35-ledger-ui .srd35-ledger .srd35-card .srd35-class-chip { border-color: var(--led-edge); color: var(--led-ink); }
+.srd35-ledger-ui .srd35-class-chip b { color: var(--led-bronze-hi); margin-left: 2px; }
+.srd35-ledger-ui .srd35-card .srd35-class-chip b { color: var(--led-bronze); }
+.srd35-ledger-ui .srd35-ledger .srd35-class-chip:hover { border-color: var(--led-bronze-hi); }
+.srd35-ledger-ui .srd35-ledger .srd35-ghost {
+  width: 22px; height: 22px; border-radius: 50%;
+  border: 1px dashed #5a4a36; color: #b8a888; font-size: 0.7rem;
+}
+.srd35-ledger-ui .srd35-ledger .srd35-ghost:hover { border-color: var(--led-bronze-hi); color: var(--led-bronze-hi); }
+
+.srd35-ledger-ui .srd35-level {
+  display: flex; flex-direction: column; align-items: center;
+  min-width: 58px; padding: 4px 10px;
+  border: 1px solid #5a4a36; border-radius: 3px;
+  color: #b8a888; font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase;
+}
+.srd35-ledger-ui .srd35-level strong {
+  font-family: var(--led-serif); font-size: 1.5rem; line-height: 1.1;
+  letter-spacing: 0; color: var(--led-bronze-hi);
+}
+.srd35-ledger-ui .srd35-ledger .srd35-adjust-toggle {
+  display: flex; align-items: center; gap: 6px;
+  padding: 6px 10px;
+  border: 1px solid #5a4a36; border-radius: 3px;
+  color: #b8a888; font-size: 0.78rem;
+}
+.srd35-ledger-ui .srd35-ledger .srd35-adjust-toggle:hover { color: var(--led-bronze-hi); border-color: var(--led-bronze-hi); }
+.srd35-ledger-ui .srd35-ledger.is-adjusting .srd35-adjust-toggle {
+  background: var(--led-bronze-hi); border-color: var(--led-bronze-hi); color: var(--led-desk);
+}
+
+/* ── Tabs: ledger bookmarks ─────────────────────────────────────────── */
+.srd35-ledger-ui .srd35-ledger .srd35-tabs {
+  display: flex; gap: 2px; margin: 0; padding: 0; border: none;
+}
+.srd35-ledger-ui .srd35-ledger .srd35-tab-btn {
+  padding: 6px 14px;
+  font-family: var(--led-serif);
+  font-size: 0.74rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #9d8d70;
+  border-bottom: 2px solid transparent;
+}
+.srd35-ledger-ui .srd35-ledger .srd35-tab-btn:hover { color: var(--led-paper); }
+.srd35-ledger-ui .srd35-ledger .srd35-tab-btn.active {
+  color: var(--led-paper);
+  border-bottom-color: var(--led-bronze-hi);
+}
+
+.srd35-ledger-ui .srd35-panel { display: flex; flex-direction: column; gap: 10px; }
+
+/* ── Overview grid ──────────────────────────────────────────────────── */
+.srd35-ledger-ui .srd35-overview {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 10px;
+  align-items: start;
+}
+.srd35-ledger-ui .srd35-overview-main { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.srd35-ledger-ui .srd35-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+.srd35-ledger-ui .srd35-big {
+  font-family: var(--led-serif);
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.srd35-ledger-ui .srd35-hp-figure { display: flex; align-items: baseline; justify-content: center; gap: 6px; }
+.srd35-ledger-ui .srd35-ledger .srd35-hp-figure .srd35-in.srd35-big { width: 2.2em; font-family: var(--led-serif); font-size: 2rem; font-weight: 700; text-align: right; }
+.srd35-ledger-ui .srd35-hp-sep { color: var(--led-ink-dim); font-size: 1.3rem; }
+.srd35-ledger-ui .srd35-derived { color: var(--led-ink-dim); }
+.srd35-ledger-ui .srd35-bar {
+  height: 6px; margin: 8px 0 6px; border-radius: 3px;
+  background: rgba(43, 35, 23, 0.14); overflow: hidden;
+}
+.srd35-ledger-ui .srd35-bar span { display: block; height: 100%; background: var(--led-danger); border-radius: 3px; }
+.srd35-ledger-ui .srd35-hp-foot { display: flex; justify-content: center; font-size: 0.8rem; color: var(--led-ink-dim); }
+
+.srd35-ledger-ui .srd35-adj-grid {
+  grid-template-columns: repeat(auto-fill, minmax(92px, 1fr));
+  gap: 4px 10px;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px dotted var(--led-rule);
+}
+.srd35-ledger-ui .srd35-adj-grid label {
+  display: flex; justify-content: space-between; align-items: center; gap: 4px;
+  font-size: 0.72rem; color: var(--led-ink-dim);
+}
+
+.srd35-ledger-ui .srd35-ac-trio { display: grid; grid-template-columns: 1.3fr 1fr 1fr; align-items: end; }
+.srd35-ledger-ui .srd35-ac {
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  cursor: help; padding: 2px 0;
+}
+.srd35-ledger-ui .srd35-ac + .srd35-ac { border-left: 1px solid var(--led-rule); }
+.srd35-ledger-ui .srd35-ac strong {
+  font-family: var(--led-serif); font-size: 1.45rem; line-height: 1; font-variant-numeric: tabular-nums;
+}
+.srd35-ledger-ui .srd35-ac-main strong { font-size: 2.1rem; }
+.srd35-ledger-ui .srd35-ac span {
+  font-size: 0.6rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--led-ink-dim);
+}
+
+.srd35-ledger-ui .srd35-save-trio { display: grid; grid-template-columns: repeat(3, 1fr); }
+.srd35-ledger-ui .srd35-save { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.srd35-ledger-ui .srd35-save + .srd35-save { border-left: 1px solid var(--led-rule); }
+.srd35-ledger-ui .srd35-ledger .srd35-save-total {
+  color: var(--led-ink);
+  font-family: var(--led-serif); font-size: 1.6rem; font-weight: 700; line-height: 1.05;
+  padding: 0 8px; font-variant-numeric: tabular-nums;
+}
+.srd35-ledger-ui .srd35-save-name { font-size: 0.78rem; color: var(--led-ink-dim); }
+.srd35-ledger-ui .srd35-save label { font-size: 0.72rem; color: var(--led-ink-dim); }
+
+.srd35-ledger-ui .srd35-offense-stats {
+  display: flex; gap: 12px; align-items: baseline;
+  font-family: var(--font-body); font-size: 0.8rem; letter-spacing: 0; text-transform: none;
+  color: var(--led-ink-dim); font-weight: 400;
+}
+.srd35-ledger-ui .srd35-offense-stats b { color: var(--led-ink); font-variant-numeric: tabular-nums; }
+
+.srd35-ledger-ui .srd35-weapons { list-style: none; margin: 0; padding: 0; }
+.srd35-ledger-ui .srd35-weapon {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-areas: "name name tools" "atks damage crit";
+  align-items: center;
+  gap: 4px 10px;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--led-rule);
+  font-size: 0.88rem;
+}
+.srd35-ledger-ui .srd35-ledger .srd35-weapon-name { grid-area: name; text-align: left; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.srd35-ledger-ui .srd35-ledger .srd35-weapon-name:hover { color: var(--led-bronze); }
+.srd35-ledger-ui .srd35-weapon-atks { grid-area: atks; display: flex; gap: 3px; }
+.srd35-ledger-ui .srd35-ledger .srd35-atk {
+  min-width: 2.4em; padding: 1px 4px;
+  border: 1px solid var(--led-edge); border-radius: 2px;
+  font-variant-numeric: tabular-nums; font-weight: 700;
+}
+.srd35-ledger-ui .srd35-ledger .srd35-damage { grid-area: damage; justify-self: start; font-variant-numeric: tabular-nums; }
+.srd35-ledger-ui .srd35-crit { grid-area: crit; color: var(--led-ink-dim); font-size: 0.78rem; text-align: right; }
+.srd35-ledger-ui .srd35-weapon-tools { grid-area: tools; justify-self: end; display: flex; gap: 8px; color: var(--led-ink-dim); font-size: 0.8rem; }
+.srd35-ledger-ui .srd35-ledger .srd35-weapon-tools button:hover { color: var(--led-bronze); }
+
+.srd35-ledger-ui .srd35-ledger .srd35-add {
+  margin-top: 8px; font-size: 0.8rem; color: var(--led-bronze); font-weight: 600;
+}
+.srd35-ledger-ui .srd35-ledger .srd35-add:hover { text-decoration: underline; }
+.srd35-ledger-ui .srd35-ledger .srd35-panel > .srd35-add,
+.srd35-ledger-ui .srd35-ledger .srd35-panel-foot .srd35-add { color: var(--led-bronze-hi); }
+.srd35-ledger-ui .srd35-empty { margin: 4px 0; font-size: 0.82rem; font-style: italic; color: var(--led-ink-dim); }
+.srd35-ledger-ui .srd35-panel > .srd35-empty { color: #9d8d70; }
+
+/* ── Skill ledger ───────────────────────────────────────────────────── */
+.srd35-ledger-ui .srd35-skills { display: flex; flex-direction: column; max-height: 680px; }
+.srd35-ledger-ui .srd35-overview .srd35-row-2 { grid-template-columns: 1fr; }
+.srd35-ledger-ui .srd35-skill-head,
+.srd35-ledger-ui .srd35-skill {
+  display: grid;
+  grid-template-columns: 16px minmax(0, 1fr) 2.8em 2.6em;
+  align-items: center;
+  gap: 6px;
+}
+.srd35-ledger-ui .is-adjusting .srd35-skill-head,
+.srd35-ledger-ui .is-adjusting .srd35-skill { grid-template-columns: 16px minmax(0, 1fr) 2.8em 2.6em 2.6em; }
+.srd35-ledger-ui .srd35-skill-head {
+  font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--led-ink-dim);
+  padding-bottom: 4px; border-bottom: 1px solid var(--led-edge);
+}
+.srd35-ledger-ui .srd35-skill-head span:nth-child(n+3) { text-align: center; }
+.srd35-ledger-ui .srd35-skill-list { overflow-y: auto; min-height: 0; margin-right: -6px; padding-right: 6px; }
+.srd35-ledger-ui .srd35-skill { padding: 3px 0; border-bottom: 1px solid rgba(203, 186, 144, 0.55); font-size: 0.84rem; }
+.srd35-ledger-ui .srd35-skill-name { min-width: 0; display: flex; align-items: baseline; gap: 4px; overflow: hidden; white-space: nowrap; }
+.srd35-ledger-ui .srd35-skill-name small { flex: none; }
+.srd35-ledger-ui .srd35-skill-name small { font-size: 0.64rem; color: var(--led-ink-dim); letter-spacing: 0.06em; }
+.srd35-ledger-ui .srd35-skill.is-class .srd35-skill-name { color: var(--led-moss); font-weight: 600; }
+.srd35-ledger-ui .srd35-ledger .srd35-skill-sub { flex: 1 1 0; min-width: 3em; width: auto; text-align: left; font-size: 0.78rem; color: var(--led-ink-dim); }
+.srd35-ledger-ui .srd35-ledger .srd35-skill .srd35-in-sm { width: 100%; }
+.srd35-ledger-ui .srd35-ledger .srd35-skill-total { text-align: right; font-weight: 700; font-variant-numeric: tabular-nums; }
+.srd35-ledger-ui .srd35-check { accent-color: var(--led-moss); margin: 0; }
+.srd35-ledger-ui .srd35-skill-foot {
+  display: flex; justify-content: space-between; margin-top: 6px; padding-top: 6px;
+  border-top: 1px solid var(--led-edge); font-size: 0.72rem; color: var(--led-ink-dim);
+}
+.srd35-ledger-ui .srd35-skill-foot b { color: var(--led-ink); }
+
+/* ── Other tabs ─────────────────────────────────────────────────────── */
+.srd35-ledger-ui .srd35-slots { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
+.srd35-ledger-ui .srd35-slot {
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  padding: 6px 0; border: 1px solid var(--led-rule); border-radius: 2px;
+}
+.srd35-ledger-ui .srd35-slot-level { font-family: var(--led-serif); font-size: 0.7rem; color: var(--led-bronze); letter-spacing: 0.1em; }
+.srd35-ledger-ui .srd35-slot-count { display: flex; align-items: baseline; gap: 2px; }
+.srd35-ledger-ui .srd35-slot-count i { color: var(--led-ink-dim); font-style: normal; }
+.srd35-ledger-ui .srd35-list { list-style: none; margin: 0; padding: 0; }
+.srd35-ledger-ui .srd35-list li {
+  display: flex; align-items: center; gap: 8px; padding: 5px 0; border-bottom: 1px solid var(--led-rule); font-size: 0.88rem;
+}
+.srd35-ledger-ui .srd35-ledger .srd35-list-name { flex: 1; text-align: left; }
+.srd35-ledger-ui .srd35-ledger .srd35-list-name:hover { color: var(--led-bronze); }
+.srd35-ledger-ui .srd35-list-meta { color: var(--led-ink-dim); font-size: 0.78rem; }
+.srd35-ledger-ui .srd35-ledger .srd35-list-tool { color: var(--led-ink-dim); font-size: 0.78rem; }
+.srd35-ledger-ui .srd35-ledger .srd35-list-tool:hover { color: var(--led-danger); }
+.srd35-ledger-ui .srd35-panel-foot { display: flex; justify-content: space-between; align-items: center; color: #b8a888; font-size: 0.82rem; }
+.srd35-ledger-ui .srd35-notes-card { padding: 0; overflow: hidden; }
+.srd35-ledger-ui .srd35-ledger .srd35-notes {
+  display: block; box-sizing: border-box; width: 100%; min-height: 420px; resize: vertical; margin: 0;
+  background: repeating-linear-gradient(180deg, transparent 0 25px, var(--led-rule) 25px 26px);
+  background-attachment: local;
+  border: none; color: var(--led-ink); font: inherit; line-height: 26px; padding: 4px 14px;
+}
+.srd35-ledger-ui .srd35-ledger .srd35-notes:focus { outline: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .srd35-ledger-ui * { transition: none !important; }
+}
+
+/* ── v3: real parchment, AC shield, level ring, ledger sum (signature) ── */
+.srd35-ledger-ui .srd35-card {
+  background:
+    linear-gradient(180deg, rgba(236, 223, 190, 0.80) 0%, rgba(222, 204, 164, 0.86) 100%),
+    url('/marketplace/rulesets/srd35/assets/textures/parchment.webp') center / 512px repeat;
+}
+
+.srd35-ledger-ui .srd35-level {
+  border: none;
+  width: 72px; height: 72px; min-width: 0; padding: 0;
+  justify-content: center;
+  background: url('/marketplace/rulesets/srd35/assets/ui/level-ring.webp') center / contain no-repeat;
+  font-size: 0.5rem;
+}
+.srd35-ledger-ui .srd35-level span { display: none; }
+.srd35-ledger-ui .srd35-level strong { font-size: 1.45rem; margin: 0; color: #f3ead6; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8); }
+
+.srd35-ledger-ui .srd35-ac-main { position: relative; cursor: help; outline: none; }
+.srd35-ledger-ui .srd35-ac-shield {
+  display: grid; place-items: center;
+  width: 92px; height: 92px; margin: -10px 0 -6px;
+  background:
+    url('/marketplace/rulesets/srd35/assets/ui/ac-shield.webp') center / contain no-repeat,
+    radial-gradient(circle 18px at 50% 45%, #fbf7ee 96%, transparent 100%);
+}
+.srd35-ledger-ui .srd35-ac-main .srd35-ac-shield strong {
+  font-size: 1.45rem; color: var(--led-ink); margin-top: -6px;
+}
+
+/* Signature: the AC written out as a ledger column with a sum rule. */
+.srd35-ledger-ui .srd35-sum {
+  position: absolute; z-index: 5;
+  top: calc(100% + 6px); left: 50%;
+  translate: -50% -4px;
+  min-width: 150px;
+  padding: 8px 12px 6px;
+  background:
+    linear-gradient(180deg, rgba(240, 229, 200, 0.95), rgba(228, 212, 176, 0.97)),
+    url('/marketplace/rulesets/srd35/assets/textures/parchment.webp') center / 384px;
+  border: 1px solid var(--led-edge);
+  border-radius: 2px;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.45);
+  opacity: 0; visibility: hidden;
+  transition: opacity 140ms, translate 140ms, visibility 0s 140ms;
+  pointer-events: none;
+}
+.srd35-ledger-ui .srd35-ac-main:hover .srd35-sum,
+.srd35-ledger-ui .srd35-ac-main:focus-visible .srd35-sum,
+.srd35-ledger-ui .is-adjusting .srd35-ac-main .srd35-sum {
+  opacity: 1; visibility: visible; translate: -50% 0;
+  transition: opacity 140ms, translate 140ms;
+}
+.srd35-ledger-ui .is-adjusting .srd35-ac-main .srd35-sum { position: static; translate: 0; margin-top: 8px; box-shadow: none; }
+.srd35-ledger-ui .srd35-sum-line {
+  display: grid; grid-template-columns: 2.4em 1fr; gap: 8px; align-items: baseline;
+  font-size: 0.8rem; line-height: 1.45; text-transform: none; letter-spacing: 0;
+}
+.srd35-ledger-ui .srd35-sum-line b {
+  text-align: right; font-family: var(--led-serif); font-variant-numeric: tabular-nums; color: var(--led-ink);
+}
+.srd35-ledger-ui .srd35-sum-line i { font-style: italic; color: var(--led-ink-dim); }
+.srd35-ledger-ui .srd35-sum-total {
+  margin-top: 3px; padding-top: 3px;
+  border-top: 1px solid var(--led-ink);
+  box-shadow: 0 -3px 0 -2px var(--led-ink);
+}
+.srd35-ledger-ui .srd35-sum-total b { font-size: 1rem; }
+.srd35-ledger-ui .srd35-sum-total i { font-style: normal; font-weight: 700; color: var(--led-bronze); }
+
+/* ── v4: fixes found in the real Loom window ─────────────────────────
+   The sheet classes land on the whole .loom-window (header included),
+   so the leather desk is painted once on the window and the engine
+   title bar is blended into it instead of floating as a navy strip.
+   The engine input/checkbox rules use !important, so the scoped
+   overrides below must too (higher specificity + !important wins). */
+.loom-window.srd35-ledger-ui {
+  padding: 0;
+  overflow: hidden;
+  background: radial-gradient(120% 80% at 0% 0%, #2a2219 0%, transparent 60%), #1a1611;
+}
+.loom-window.srd35-ledger-ui > .loom-window-body {
+  background: transparent;
+  padding: 14px 14px 14px;
+  overflow-y: auto;
+}
+.loom-window.srd35-ledger-ui > .loom-window-header {
+  background: transparent;
+  border-bottom: none;
+  box-shadow: none;
+  padding-left: 16px;
+}
+.loom-window.srd35-ledger-ui .loom-window-title {
+  font-family: var(--led-serif);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  color: #8f7d5e;
+}
+.loom-window.srd35-ledger-ui .loom-window-controls button { color: #8f7d5e; }
+.loom-window.srd35-ledger-ui .loom-window-controls button:hover { color: var(--led-bronze-hi); }
+
+.srd35-ledger-ui .srd35-ledger input.srd35-in,
+.srd35-ledger-ui .srd35-ledger select.srd35-in,
+.srd35-ledger-ui .srd35-ledger textarea.srd35-notes {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: var(--led-ink) !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+.srd35-ledger-ui .srd35-ledger input.srd35-in,
+.srd35-ledger-ui .srd35-ledger select.srd35-in {
+  border-bottom: 1px dashed var(--led-edge) !important;
+  padding: 0 2px !important;
+  font-size: inherit !important;
+}
+.srd35-ledger-ui .srd35-ledger textarea.srd35-notes {
+  background:
+    repeating-linear-gradient(180deg, transparent 0 25px, var(--led-rule) 25px 26px) local !important;
+}
+.srd35-ledger-ui .srd35-ledger input.srd35-in:hover,
+.srd35-ledger-ui .srd35-ledger select.srd35-in:hover { border-bottom-color: var(--led-bronze) !important; }
+.srd35-ledger-ui .srd35-ledger input.srd35-in:focus,
+.srd35-ledger-ui .srd35-ledger select.srd35-in:focus {
+  border-bottom: 1px solid var(--led-bronze) !important;
+  background-color: rgba(138, 87, 31, 0.08) !important;
+}
+.srd35-ledger-ui .srd35-ledger input.srd35-name {
+  color: var(--led-paper) !important;
+  border-bottom-color: transparent !important;
+  font-size: 1.7rem !important;
+}
+.srd35-ledger-ui .srd35-ledger input.srd35-name:hover,
+.srd35-ledger-ui .srd35-ledger input.srd35-name:focus {
+  border-bottom-color: var(--led-bronze-hi) !important;
+  background-color: transparent !important;
+}
+.srd35-ledger-ui .srd35-ledger input.srd35-big { font-size: 2rem !important; }
+.srd35-ledger-ui .srd35-ledger input.srd35-ability-score { font-size: 1.1rem !important; }
+.srd35-ledger-ui .srd35-ledger select.srd35-in option { color: #1a1611; }
+
+/* class-skill checkbox: ink box on paper, moss when checked */
+.srd35-ledger-ui .srd35-ledger input.srd35-check {
+  width: 14px !important; height: 14px !important;
+  min-width: 14px !important; min-height: 14px !important;
+  max-width: 14px !important; max-height: 14px !important;
+  border: 1px solid var(--led-ink-dim) !important;
+  border-radius: 2px !important;
+  background: transparent !important;
+}
+.srd35-ledger-ui .srd35-ledger input.srd35-check:checked {
+  background: var(--led-moss) !important;
+  border-color: var(--led-moss) !important;
+}
+.srd35-ledger-ui .srd35-ledger input.srd35-check:checked::after {
+  left: 4px; top: 1px; width: 3px; height: 7px;
+  border-color: var(--led-paper);
+}
+
+.srd35-ledger-ui .srd35-ledger .srd35-in::placeholder { color: var(--led-ink-dim) !important; opacity: 0.55; font-style: italic; }
+
+/* Skill ledger matches the height of the vitals column and scrolls inside it,
+   so both columns end on the same line. height:0 keeps the long list from
+   driving the grid row; min-height stretches it back to the row. */
+.srd35-ledger-ui .srd35-overview { align-items: stretch; }
+.srd35-ledger-ui .srd35-overview .srd35-skills {
+  height: 0;
+  min-height: max(100%, 420px);
+  max-height: none;
+  box-sizing: border-box;
+}
+.srd35-ledger-ui .srd35-overview .srd35-skill-list { flex: 1 1 0; min-height: 0; }
+.srd35-ledger-ui .srd35-overview-main { align-self: start; }
+
+/* ── v5: NPC stat block + item sheet in the same ledger vocabulary ──
+   New rules only; nothing above is touched. Everything below is scoped
+   to the NPC or item sheet root, so the character sheet is unaffected. */
+
+/* NPC root: single-column block, not the character rail grid. */
+.srd35-ledger-ui .srd35-ledger.srd35-npc {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* NPC top: small portrait + identity + adjust toggle. */
+.srd35-ledger-ui .srd35-npc-top {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 14px;
+  padding: 2px 0 8px;
+  border-bottom: 1px solid #3b3126;
+}
+.srd35-ledger-ui .srd35-ledger .srd35-npc-portrait {
+  width: 96px;
+  aspect-ratio: 1 / 1;
+  font-size: 2rem;
+}
+.srd35-ledger-ui .srd35-npc-id { min-width: 0; }
+.srd35-ledger-ui .srd35-npc-level { color: #b8a888; }
+.srd35-ledger-ui .srd35-npc-level b { color: var(--led-bronze-hi); }
+
+/* NPC vitals: HP and Defense cards side by side. */
+.srd35-ledger-ui .srd35-npc-vitals {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 10px;
+  align-items: start;
+}
+
+/* NPC mid card: saves trio on top, initiative + offense below. */
+.srd35-ledger-ui .srd35-npc-mid-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 8px;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--led-rule);
+  font-size: 0.85rem;
+  color: var(--led-ink-dim);
+}
+.srd35-ledger-ui .srd35-npc-init,
+.srd35-ledger-ui .srd35-npc-offense {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+.srd35-ledger-ui .srd35-npc-init strong,
+.srd35-ledger-ui .srd35-npc-offense b {
+  font-family: var(--led-serif);
+  font-size: 1.1rem;
+  color: var(--led-ink);
+}
+
+/* NPC abilities: horizontal six-column strip, score above, mod below. */
+.srd35-ledger-ui .srd35-npc-abilities {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 4px;
+}
+.srd35-ledger-ui .srd35-npc-ability {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 4px 0;
+}
+.srd35-ledger-ui .srd35-npc-ability + .srd35-npc-ability { border-left: 1px solid var(--led-rule); }
+.srd35-ledger-ui .srd35-npc-ability-name {
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--led-ink-dim);
+}
+.srd35-ledger-ui .srd35-ledger .srd35-npc-ability-score {
+  width: 100%;
+  font-family: var(--led-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+.srd35-ledger-ui .srd35-ledger .srd35-npc-ability-mod {
+  font-family: var(--led-serif);
+  font-size: 1.05rem;
+  font-weight: 700;
+  padding: 0 8px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* NPC compact skill rows reuse the ledger list. */
+.srd35-ledger-ui .srd35-npc .srd35-list li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 3.2em 2.6em;
+  align-items: center;
+  gap: 6px;
+}
+.srd35-ledger-ui .srd35-npc-skills .srd35-skill-name small {
+  font-size: 0.64rem;
+  color: var(--led-ink-dim);
+  letter-spacing: 0.06em;
+}
+.srd35-ledger-ui .srd35-npc-skills .srd35-skill-total {
+  text-align: right;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+/* NPC notes stay compact. */
+.srd35-ledger-ui .srd35-npc .srd35-notes { min-height: 140px; }
+
+/* Item root: single column, not the character rail grid. */
+.srd35-ledger-ui .srd35-ledger.srd35-item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Item header sits on the dark desk: leather icon + paper name. */
+.srd35-ledger-ui .srd35-item-head {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+  padding: 2px 0 8px;
+  border-bottom: 1px solid #3b3126;
+}
+.srd35-ledger-ui .srd35-ledger .srd35-item-icon {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  border: 1px solid #5a4a36;
+  border-radius: 3px;
+  overflow: hidden;
+  background: linear-gradient(160deg, #3a3025, #211a13);
+  display: grid;
+  place-items: center;
+  color: #b8a888;
+  font-size: 1.4rem;
+}
+.srd35-ledger-ui .srd35-item-icon img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.srd35-ledger-ui .srd35-ledger .srd35-item-icon:hover { border-color: var(--led-bronze-hi); color: var(--led-bronze-hi); }
+.srd35-ledger-ui .srd35-item-id { min-width: 0; }
+.srd35-ledger-ui .srd35-item-type {
+  margin-top: 2px;
+  font-size: 0.8rem;
+  font-style: italic;
+  color: #b8a888;
+}
+
+/* Item fields: two-column ledger, faint label left, input right. */
+.srd35-ledger-ui .srd35-item-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 14px;
+}
+.srd35-ledger-ui .srd35-item-field {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--led-rule);
+  font-size: 0.84rem;
+  color: var(--led-ink-dim);
+}
+.srd35-ledger-ui .srd35-ledger .srd35-item-field .srd35-in { flex: 0 1 8em; min-width: 0; }
+.srd35-ledger-ui .srd35-item .srd35-progression {
+  border-top: 1px solid var(--led-rule);
+  margin-top: 8px;
+  padding-top: 6px;
+  font-variant-numeric: tabular-nums;
+  color: var(--led-moss);
+  font-size: 0.82rem;
+}
+
+/* Item description stays compact. */
+.srd35-ledger-ui .srd35-item .srd35-notes { min-height: 220px; }
+.srd35-ledger-ui .srd35-ledger select.srd35-in option { background: #efe4c8 !important; color: #2b2317 !important; }
+
+/* XP ledger line under the name: bronze bar on the dark desk */
+.srd35-ledger-ui .srd35-xp { display: flex; align-items: center; gap: 8px; margin-top: 6px; max-width: 440px; }
+.srd35-ledger-ui .srd35-xp-label { font-family: var(--led-serif); font-size: 0.8rem; letter-spacing: 0.12em; color: #b8a888; }
+.srd35-ledger-ui .srd35-xp-bar { flex: 1; height: 6px; border-radius: 3px; background: rgba(255, 255, 255, 0.08); overflow: hidden; }
+.srd35-ledger-ui .srd35-xp-bar span { display: block; height: 100%; background: linear-gradient(90deg, #8a571f, #c99655); }
+.srd35-ledger-ui .srd35-xp.is-ready .srd35-xp-bar { box-shadow: 0 0 8px rgba(201, 150, 85, 0.7); }
+.srd35-ledger-ui .srd35-xp-read { font-family: var(--led-serif); font-size: 0.85rem; color: #b8a888; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.srd35-ledger-ui .srd35-ledger input.srd35-xp-in { width: 4.2em; color: var(--led-paper) !important; border-bottom-color: #5a4a36 !important; }

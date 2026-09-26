@@ -1,0 +1,50 @@
+<div class="srd35-ledger srd35-item">
+
+  {{!-- Dark header: clickable icon + name + type --}}
+  <header class="srd35-item-head">
+    <button type="button" class="srd35-item-icon" data-action="pick-icon" title="{{localize "sheet.pickIcon"}}">
+      {{#if imgUrl}}<img src="{{imgUrl}}" alt="" />{{else}}{{#if icon}}<span>{{icon}}</span>{{else}}<i class="fa-solid fa-box"></i>{{/if}}{{/if}}
+    </button>
+    <div class="srd35-item-id">
+      <input class="srd35-in srd35-name" type="text" name="name" value="{{name}}" placeholder="{{localize "sheet.name"}}" />
+      <div class="srd35-item-type">{{localize (concat "itemTypes." type)}}</div>
+    </div>
+  </header>
+
+  <nav class="srd35-tabs">
+    <button type="button" class="srd35-tab-btn" data-action="tab" data-tab="details">{{localize "sheet.details"}}</button>
+    <button type="button" class="srd35-tab-btn" data-action="tab" data-tab="description">{{localize "sheet.description"}}</button>
+  </nav>
+
+  <div class="srd35-panel" data-tab-content="details">
+    <section class="srd35-card">
+      <div class="srd35-item-grid">
+        {{#each fields}}
+        <label class="srd35-item-field">
+          <span>{{localize label}}</span>
+          {{#if isNumber}}<input class="srd35-in srd35-in-sm" type="number" name="sd:{{key}}" value="{{value}}" />{{/if}}
+          {{#if isText}}<input class="srd35-in" type="text" name="sd:{{key}}" value="{{value}}" />{{/if}}
+          {{#if isCsv}}<input class="srd35-in" type="text" name="sd:{{key}}" value="{{value}}" />{{/if}}
+          {{#if isSelect}}<select class="srd35-in srd35-select" name="sd:{{key}}">
+            {{#each options}}<option value="{{value}}" {{#if selected}}selected{{/if}}>{{value}}</option>{{/each}}
+          </select>{{/if}}
+        </label>
+        {{/each}}
+      </div>
+      {{#if progression}}
+      <div class="srd35-progression" title="{{localize "sheet.progressionHint"}}">
+        {{localize "sheet.progression"}}: {{localize "sheet.bab"}} +{{progression.bab}} ·
+        {{localize "saves.fort"}} +{{progression.fort}} ·
+        {{localize "saves.ref"}} +{{progression.ref}} ·
+        {{localize "saves.will"}} +{{progression.will}}
+      </div>
+      {{/if}}
+    </section>
+  </div>
+
+  <div class="srd35-panel" data-tab-content="description">
+    <section class="srd35-card srd35-notes-card">
+      <textarea class="srd35-notes" name="sd:description" placeholder="{{localize "sheet.description"}}">{{description}}</textarea>
+    </section>
+  </div>
+</div>
